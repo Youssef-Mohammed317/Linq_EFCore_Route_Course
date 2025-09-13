@@ -1,0 +1,4 @@
+﻿global using Assignment.Models;
+global using Assignment.Contexts;
+global using System.ComponentModel.DataAnnotations;
+
