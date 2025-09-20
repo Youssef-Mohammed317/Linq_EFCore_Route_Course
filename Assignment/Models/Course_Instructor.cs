@@ -17,5 +17,10 @@ namespace Assignment.Models
         public int CourseId { get; set; }
         [Required]
         public int Evaluate { get; set; }
+
+        [ForeignKey(nameof(CourseId))]
+        public Instructor? instructor { get; set; }
+        [ForeignKey(nameof(InstructorId))]
+        public Course? course { get; set; }
     }
 }

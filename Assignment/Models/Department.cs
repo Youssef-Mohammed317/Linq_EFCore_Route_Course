@@ -18,5 +18,9 @@ namespace Assignment.Models
         public int? InstructorId { get; set; }
         [Required]
         public DateTime HiringDate { get; set; }
+
+        [ForeignKey(nameof(InstructorId))]
+        //[InverseProperty(nameof(Instructor.Department))]
+        public Instructor? Instructor { get; set; }
     }
 }

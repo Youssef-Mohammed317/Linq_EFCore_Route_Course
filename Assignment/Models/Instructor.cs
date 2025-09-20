@@ -22,5 +22,9 @@ namespace Assignment.Models
         [AllowNull]
         public decimal? Bonus { get; set; }
         public int DepartmentId { get; set; }
+
+        [ForeignKey(nameof(DepartmentId))]
+        //[InverseProperty(nameof(Department.Instructor))]
+        public Department? Department { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,12 @@ namespace Assignment.Models
         public int CourseId { get; set; }
         [AllowNull]
         public int? Grade { get; set; }
+
+
+        [ForeignKey(nameof(StudentId))]
+        public Student? student { get; set; }
+
+        [ForeignKey(nameof(CourseId))]
+        public Course? course { get; set; }
     }
 }

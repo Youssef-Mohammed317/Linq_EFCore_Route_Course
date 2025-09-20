@@ -21,5 +21,8 @@ namespace Assignment.Models
         [AllowNull]
         public string? Description { get; set; }
         public int TopicId { get; set; }
+
+        [ForeignKey(nameof(TopicId))]
+        public Topic? topic { get; set; }
     }
 }
