@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assignment.ERD_Problems.Problem02
+{
+    internal class Consultant
+    {
+        [Key]
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public ICollection<Patient_Consultant_Examine> patient_Consultant_Examines { get; set; }
+
+
+
+    }
+}
