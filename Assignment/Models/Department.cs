@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Assignment.Models
 {
-    internal class Department
+    public class Department
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required, MaxLength(50)]
         public string? Name { get; set; }
@@ -20,7 +20,12 @@ namespace Assignment.Models
         public DateTime HiringDate { get; set; }
 
         [ForeignKey(nameof(InstructorId))]
-        //[InverseProperty(nameof(Instructor.Department))]
-        public Instructor? Instructor { get; set; }
+        public virtual Instructor? Instructor { get; set; }
+
+        [InverseProperty("Department")]
+        public virtual ICollection<Instructor> Instructors { get; set; }
+        public virtual ICollection<Student> Students { get; set; }
+
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

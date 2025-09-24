@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Assignment.Models
 {
     [Table("Courses", Schema = "dbo")]
-    internal class Course
+    public class Course
     {
         [Key]
         public int Id { get; set; }
@@ -23,6 +23,14 @@ namespace Assignment.Models
         public int TopicId { get; set; }
 
         [ForeignKey(nameof(TopicId))]
-        public Topic? topic { get; set; }
+        public virtual Topic? topic { get; set; }
+
+
+        public virtual ICollection<Student_Course> StudentCourses { get; set; }
+
+        public virtual ICollection<Course_Instructor> CourseInstructors
+        {
+            get; set;
+        }
     }
 }

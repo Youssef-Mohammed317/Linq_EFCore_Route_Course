@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Assignment.Models
 {
-    internal class Student
+    public class Student
     {
         [Key]
         public int Id { get; set; }
@@ -23,6 +23,8 @@ namespace Assignment.Models
 
 
         [ForeignKey(nameof(DepartmentId))]
-        public Department? department { get; set; }
+        public virtual Department? department { get; set; }
+
+        public virtual ICollection<Student_Course> StudentCourses { get; set; }
     }
 }

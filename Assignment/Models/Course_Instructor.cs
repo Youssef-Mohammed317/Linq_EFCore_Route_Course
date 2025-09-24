@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Assignment.Models
 {
     [Table("Course_Inst", Schema = "dbo")]
-    internal class Course_Instructor
+    public class Course_Instructor
     {
 
         public int InstructorId { get; set; }
@@ -19,8 +19,8 @@ namespace Assignment.Models
         public int Evaluate { get; set; }
 
         [ForeignKey(nameof(CourseId))]
-        public Instructor? instructor { get; set; }
+        public virtual Instructor? instructor { get; set; }
         [ForeignKey(nameof(InstructorId))]
-        public Course? course { get; set; }
+        public virtual Course? course { get; set; }
     }
 }

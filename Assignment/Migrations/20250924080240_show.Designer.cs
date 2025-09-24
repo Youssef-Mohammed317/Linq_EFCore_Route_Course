@@ -4,6 +4,7 @@ using Assignment.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20250924080240_show")]
+    partial class show
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,54 +96,6 @@ namespace Assignment.Migrations
                     b.HasIndex("InstructorId");
 
                     b.ToTable("Departments");
-                });
-
-            modelBuilder.Entity("Assignment.Models.Employee", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmpAddress_City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmpAddress_Country")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmpAddress_Street")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Salary")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("Assignment.Models.Instructor", b =>
@@ -255,7 +210,7 @@ namespace Assignment.Migrations
             modelBuilder.Entity("Assignment.Models.Course", b =>
                 {
                     b.HasOne("Assignment.Models.Topic", "topic")
-                        .WithMany("Courses")
+                        .WithMany()
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -266,13 +221,13 @@ namespace Assignment.Migrations
             modelBuilder.Entity("Assignment.Models.Course_Instructor", b =>
                 {
                     b.HasOne("Assignment.Models.Instructor", "instructor")
-                        .WithMany("CourseInstructors")
+                        .WithMany()
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Assignment.Models.Course", "course")
-                        .WithMany("CourseInstructors")
+                        .WithMany()
                         .HasForeignKey("InstructorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -291,21 +246,10 @@ namespace Assignment.Migrations
                     b.Navigation("Instructor");
                 });
 
-            modelBuilder.Entity("Assignment.Models.Employee", b =>
-                {
-                    b.HasOne("Assignment.Models.Department", "Department")
-                        .WithMany("Employees")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
-                });
-
             modelBuilder.Entity("Assignment.Models.Instructor", b =>
                 {
                     b.HasOne("Assignment.Models.Department", "Department")
-                        .WithMany("Instructors")
+                        .WithMany()
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -316,7 +260,7 @@ namespace Assignment.Migrations
             modelBuilder.Entity("Assignment.Models.Student", b =>
                 {
                     b.HasOne("Assignment.Models.Department", "department")
-                        .WithMany("Students")
+                        .WithMany()
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -327,13 +271,13 @@ namespace Assignment.Migrations
             modelBuilder.Entity("Assignment.Models.Student_Course", b =>
                 {
                     b.HasOne("Assignment.Models.Course", "course")
-                        .WithMany("StudentCourses")
+                        .WithMany()
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Assignment.Models.Student", "student")
-                        .WithMany("StudentCourses")
+                        .WithMany()
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -341,37 +285,6 @@ namespace Assignment.Migrations
                     b.Navigation("course");
 
                     b.Navigation("student");
-                });
-
-            modelBuilder.Entity("Assignment.Models.Course", b =>
-                {
-                    b.Navigation("CourseInstructors");
-
-                    b.Navigation("StudentCourses");
-                });
-
-            modelBuilder.Entity("Assignment.Models.Department", b =>
-                {
-                    b.Navigation("Employees");
-
-                    b.Navigation("Instructors");
-
-                    b.Navigation("Students");
-                });
-
-            modelBuilder.Entity("Assignment.Models.Instructor", b =>
-                {
-                    b.Navigation("CourseInstructors");
-                });
-
-            modelBuilder.Entity("Assignment.Models.Student", b =>
-                {
-                    b.Navigation("StudentCourses");
-                });
-
-            modelBuilder.Entity("Assignment.Models.Topic", b =>
-                {
-                    b.Navigation("Courses");
                 });
 #pragma warning restore 612, 618
         }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Assignment.Models
 {
-    internal class Student_Course
+    public class Student_Course
     {
         public int StudentId { get; set; }
         public int CourseId { get; set; }
@@ -17,9 +17,9 @@ namespace Assignment.Models
 
 
         [ForeignKey(nameof(StudentId))]
-        public Student? student { get; set; }
+        public virtual Student? student { get; set; }
 
         [ForeignKey(nameof(CourseId))]
-        public Course? course { get; set; }
+        public virtual Course? course { get; set; }
     }
 }

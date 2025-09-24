@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Assignment.Contexts
 {
-    internal class Context : DbContext
+    public class Context : DbContext
     {
 
         public DbSet<Department> Departments { get; set; }
@@ -17,10 +17,12 @@ namespace Assignment.Contexts
         public DbSet<Instructor> Instructors { get; set; }
         public DbSet<Course_Instructor> Course_Instructors { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=RouteContext;Integrated Security=True;TrustServerCertificate=True");
+            optionsBuilder.UseLazyLoadingProxies()
+                .UseSqlServer("Data Source=.;Initial Catalog=RouteContext;Integrated Security=True;TrustServerCertificate=True");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
